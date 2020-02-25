@@ -1,0 +1,4 @@
+* DONE Add TODO.org
+* TODO Tab completion
+* TODO Separate highlighting for logs
+* TODO Concatenate split inputs in history
