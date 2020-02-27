@@ -97,6 +97,7 @@
 
 ;;;###autoload
 (defun run-iex (command)
+  "Run iex in the current directory."
   (interactive
    (list (read-shell-command "iex> " "iex")))
   (let ((default-directory (iex-default-directory))
@@ -110,5 +111,13 @@
         (setq-local iex-buffer-command command))
       (iex-mode)
       (pop-to-buffer (current-buffer)))))
+
+;;;###autoload
+(defun projectile-run-iex (command)
+  "Run iex in mix environment for current projectile mix project."
+  (interactive
+   (list (read-shell-command "iex> " "iex -S mix")))
+  (setq-local iex-default-directory-function (list #'projectile-project-root))
+  (funcall-interactively #'run-iex command))
 
 (provide 'iex-mode)
