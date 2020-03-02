@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (require 'comint)
 (require 'elixir-mode)
 (require 'subr-x)
@@ -117,7 +118,7 @@
   "Run iex in mix environment for current projectile mix project."
   (interactive
    (list (read-shell-command "iex> " "iex -S mix")))
-  (setq-local iex-default-directory-function (list #'projectile-project-root))
-  (funcall-interactively #'run-iex command))
+  (let ((iex-default-directory-function (list #'projectile-project-root)))
+    (funcall-interactively #'run-iex command)))
 
 (provide 'iex-mode)
