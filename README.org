@@ -1,0 +1,22 @@
+* iex-mode
+** Installation
+*** use-package
+
+#+BEGIN_SRC emacs-lisp
+(use-package iex-mode
+  :repo "sirikid/iex-mode" :fetcher github :version original
+  :bind
+  (:map elixir-mode-map
+    ("C-c x i" . run-iex)
+    ("C-c x p" . projectile-run-iex)))
+#+END_SRC
+
+** Usage
+
+You can run `iex` in the directory of current buffer with `M-x`
+`run-iex`.
+
+You can also run `iex -S mix` in the projectile project root with
+`M-x` `projectile-run-iex`.
+
+In both cases you can edit the exact command to run.
