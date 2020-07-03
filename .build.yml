@@ -1,0 +1,16 @@
+image: alpine/3.12
+arch: x86_64
+packages:
+  - emacs
+sources:
+  - https://git.sr.ht/~sokolov/iex-mode
+tasks:
+  install-eldev: |
+    curl -fsSL https://raw.github.com/doublep/eldev/master/bin/eldev > eldev
+    chmod a+x eldev
+  build: |
+    cd iex-mode
+    ../eldev build
+  lint: |
+    cd iex-mode
+    ../eldev lint
