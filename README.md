@@ -30,6 +30,18 @@ Just drop the file to the `load-path` or use one of the methods below.
         ("C-c x p" . projectile-run-iex)))
 
 
+## use-package+quelpa-use-package
+
+Setup and installation together.
+
+    (use-package iex-mode
+      :quelpa (iex-mode :fetcher git :url "https://git.sr.ht/~sokolov/iex-mode")
+      :bind
+      (:map elixir-mode-map
+        ("C-c x i" . run-iex)
+        ("C-c x p" . projectile-run-iex)))
+
+
 # Usage
 
 You can run `iex` in the directory of current buffer with `M-x
