@@ -1,22 +1,34 @@
+#+title: iex-mode
+#+options: toc:nil
 * iex-mode
-** Installation
-*** use-package
+  This is a simple comint wrapper around [[https://hexdocs.pm/iex/IEx.html][IEx]].
+* Installation
+  Just drop the file to the ~load-path~ or use one of the methods below.
+** quelpa
+   #+begin_src emacs-lisp
+   (quelpa
+    '(iex-mode
+      :fetcher git
+      :url "https://git.sr.ht/~sokolov/iex-mode"))
+   #+end_src
+* Setup
+** use-package
+   #+begin_src emacs-lisp
+   (use-package iex-mode
+     :bind
+     (:map elixir-mode-map
+       ("C-c x i" . run-iex)
+       ("C-c x p" . projectile-run-iex)))
+   #+end_src
+* Usage
+  You can run ~iex~ in the directory of current buffer with =M-x
+  run-iex=.
 
-#+BEGIN_SRC emacs-lisp
-(use-package iex-mode
-  :repo "sirikid/iex-mode" :fetcher github :version original
-  :bind
-  (:map elixir-mode-map
-    ("C-c x i" . run-iex)
-    ("C-c x p" . projectile-run-iex)))
-#+END_SRC
+  You can also run =iex -S mix= in the project root with =M-x
+  projectile-run-iex=.
 
-** Usage
-
-You can run `iex` in the directory of current buffer with `M-x`
-`run-iex`.
-
-You can also run `iex -S mix` in the projectile project root with
-`M-x` `projectile-run-iex`.
-
-In both cases you can edit the exact command to run.
+  In both cases you can edit the exact command to run.
+* COMMENT Local variables
+# Local Variables:
+# eval: (add-hook (quote after-save-hook) (function org-md-export-to-markdown) nil t)
+# End:
