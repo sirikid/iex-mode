@@ -35,7 +35,7 @@
   :syntax-table elixir-mode-syntax-table
 
   ;; font-lock (cursed)
-  (setq-local font-lock-defaults '(iex-font-lock-keywords nil nil (font-lock-syntactic-face-function . elixir-font-lock-syntactic-face-function)))
+  (setq-local font-lock-defaults '(iex-font-lock-keywords nil nil nil (font-lock-syntactic-face-function . elixir-font-lock-syntactic-face-function)))
 
   ;; comment
   (setq-local comment-start "# ")
