@@ -129,43 +129,39 @@ Requires projectile."
 ;;        (concat "(" (match-string-no-properties 1 command) ")")))))
 
 ;;;###autoload
-(defun run-iex (command &optional name)
+(defun iex-run (command &optional name)
   "Run COMMAND in the current directory in the buffer NAME.
-COMMAND can be any, but it makes sense to run `iex'. Default NAME
+COMMAND can be any, but ut makes sense to run `iex'.  Default NAME
 is `*iex*', it can be overridden with a universal argument."
   (interactive
    (list (read-shell-command "iex> " "iex")
          (if (not current-prefix-arg)
              "iex"
            (read-string "iex buffer name: " "iex"))))
-
   (let* ((process (or name "iex"))
          (buffer (concat "*" process "*")))
-    (pcase (split-string command)
-      ('() (user-error "No command supplied"))
-      (`(,program . ,switches)
-       (unless (get-buffer-process buffer)
-         (with-current-buffer
-             (apply #'make-comint-in-buffer process buffer program nil switches)
-           ;; (setq-local iex--buffer-command command)
-           (iex-mode)
-           (goto-char (point-max))))
-       (pop-to-buffer buffer)))))
+    (unless (get-buffer-process buffer)
+      (with-current-buffer
+          (apply #'make-comint-in-buffer process buffer "sh" nil (list "-c" command))
+        (iex-mode)
+        (goto-char (point-max))))
+    (pop-to-buffer buffer)))
 
 ;;;###autoload
-(defun run-iex-S-mix (project-dir command &optional name)
+(defun iex-run-script (project-dir command &optional name)
   "Run COMMAND in the PROJECT-DIR in the buffer NAME."
   (interactive
    (let* ((project-dir (iex--project-dir))
-          (default-name (concat "iex:" (file-name-base project-dir))))
+          (default-name (concat "iex:" (file-name-base (directory-file-name project-dir)))))
      (list
       project-dir
       (read-shell-command "iex> " "iex -S mix")
-      (if (not current-prefix-arg) default-name
+      (if (not current-prefix-arg)
+          default-name
         (read-string "iex buffer name: " default-name)))))
 
   (let ((default-directory project-dir))
-    (funcall #'run-iex command name)))
+    (funcall #'iex-run command name)))
 
 (provide 'iex-mode)
 
