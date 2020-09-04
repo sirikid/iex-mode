@@ -5,14 +5,14 @@ name: default
 
 steps:
 - name: eldev-version
-  image: silex/emacs:27.1-alpine-dev
+  image: silex/emacs:27.1-dev
   commands:
   - eldev -dvtQ --version
 - name: build
-  image: silex/emacs:27.1-alpine-dev
+  image: silex/emacs:27.1-dev
   commands:
   - eldev -dvtQ build
 - name: lint
-  image: silex/emacs:27.1-alpine-dev
+  image: silex/emacs:27.1-dev
   commands:
   - eldev -dvtQ lint
