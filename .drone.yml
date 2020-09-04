@@ -1,0 +1,18 @@
+---
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: eldev-version
+  image: silex/emacs:27.1-alpine-dev
+  commands:
+  - eldev --version
+- name: build
+  image: silex/emacs:27.1-alpine-dev
+  commands:
+  - eldev build
+- name: lint
+  image: silex/emacs:27.1-alpine-dev
+  commands:
+  - eldev lint
