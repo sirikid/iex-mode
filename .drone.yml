@@ -7,12 +7,12 @@ steps:
 - name: eldev-version
   image: silex/emacs:27.1-alpine-dev
   commands:
-  - eldev --version
+  - eldev -dvtQ --version
 - name: build
   image: silex/emacs:27.1-alpine-dev
   commands:
-  - eldev build
+  - eldev -dvtQ build
 - name: lint
   image: silex/emacs:27.1-alpine-dev
   commands:
-  - eldev lint
+  - eldev -dvtQ lint
